@@ -1,0 +1,52 @@
+======================================================================
+RAPPORT EDA — CTU-13 Scénario 8 (Botnet-49 / Murlo)
+Détecteur KGB — Pevný et al. (2012)
+======================================================================
+
+FORMAT DU FICHIER
+----------------------------------------
+Séparateur : tabulation (\t)
+Colonnes   : StartTime | Dur | Proto | SrcAddrPort | Dir |
+             DstAddrPort | Flags | Tos | TotPkts | TotBytes |
+             Flows | Label
+
+STATISTIQUES GÉNÉRALES
+----------------------------------------
+Total NetFlows analysés : 500,000
+  Background        :    466,110 (93.22%)
+  Normal            :     33,176 (6.64%)
+  Botnet            :        713 (0.14%)
+  Unknown           :          1 (0.00%)
+
+IPS SOURCES UNIQUES
+----------------------------------------
+  Background        : 43,522 IPs
+  Normal            :    129 IPs
+  Botnet            :     34 IPs
+
+FEATURES KGB — ENTROPIES MOYENNES
+----------------------------------------
+Classe           H_dst_ip   H_dst_port   H_src_port  n_flows_moy
+Botnet              0.364        1.377        0.248         59.5
+Normal              2.977        2.724        3.257       1330.6
+Background          0.058        0.104        0.080          7.5
+
+DÉSÉQUILIBRE DES CLASSES
+----------------------------------------
+Botnet / Total  : 0.143%
+Ratio imbalance : 1 Botnet pour 700 autres
+
+Recommandations pour le ML :
+  - Agréger au niveau IP (comme KGB) réduit le déséquilibre
+  - class_weight='balanced' pour SVM/RF
+  - Métriques : F1-score, AUC-ROC (pas l'Accuracy seule)
+  - Comparer KGBf (PC haute variance) vs KGBfog (PC basse variance)
+
+FICHIERS GÉNÉRÉS
+----------------------------------------
+  01_label_distribution.png
+  02_entropy_distributions.png
+  03_kgb_feature_space.png
+  eda_report.txt
+  entropy_features.csv
+  ip_aggregated.csv

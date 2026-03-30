@@ -1,0 +1,23 @@
+# Données CTU-13 (trop volumineux pour git)
+mcfp.felk.cvut.cz/
+*.pcap
+*.pcap.bz2
+*.biargus*
+*.binetflow
+*.labeled
+*.2format
+
+# Outputs Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Fichiers de résultats volumineux
+full_output/entropy_features*.csv
+sliding_output/*.csv
+
+# Garder les petits CSV de métriques
+!full_output/full_metrics.csv
+!kgb_output/metrics_comparison.csv
+!eda_output/eda_report.txt
